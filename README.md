@@ -9,7 +9,7 @@ A program that allows for trading between English and Japanese Gen 2 Pokemon Gam
 - An Arduino Uno R3/Mega (Or Any Other Compatible Microcontroller)  
 - A DMG Gameboy Running An English Copy of Pokemon Gold, Silver, or Crystal
 - A DMG Gameboy Running An Japanese Copy of Pokemon Gold, Silver, or Crystal  
-- A DMG-O4 Link Cable (Cut in half with the wires exposed, such that they can be plugged into the Arduino.)  
+- A DMG-04 Link Cable (Cut in half with the wires exposed, such that they can be plugged into the Arduino.)  
 
 ## Software Needed
 - Arduino IDE
@@ -26,7 +26,7 @@ A program that allows for trading between English and Japanese Gen 2 Pokemon Gam
 
 ## Disclaimer
 - I am not responsible for any damage or data loss that may occur while attempting to use this program. Use at your own risk. That being said, you can essentially see all of the data on the Trade screen, so if anything looks off there, cancel the trade. The trade only occurs after both players have confirmed, and thus the SRAM isn't at all touched until you confirm the trade.
-- This program is designed for standard trades between Gen 2 games, **NOT** the time machine, which is used for trading with a Gen 1 Pokemon game.
+- This program is designed for standard trades between Gen 2 games, **NOT** the time machine, which is used for trading with a Gen 1 Pokemon game. I will look into seeing what needs to be modified for the RBY trade translator to see if that is possible by changing the initial state for each Gameboy.
 
 ## Before Using
 Before using the program, a few modifications need to be made:  
@@ -36,6 +36,7 @@ Before using the program, a few modifications need to be made:
 - Modify gameboyAToBEncodedTrainerNames to contain each of the trainers names as they would appear on Gameboy B. Use the Japanese encoding table here [Generation II Character Encoding](https://bulbapedia.bulbagarden.net/wiki/Character_encoding_(Generation_II)) to generate the trainer name you'd like to send to Gameboy B. Order does matter, as each element in gameboyAToBEncodedTrainerNames corresponds to the Trainer IDs within trainerIDList, in that exact order.  
 - Modify gameboyBToAEncodedTrainerNames to contain each of the trainers names as they would appear on Gameboy A. Use the English encoding table here [Generation II Character Encoding](https://bulbapedia.bulbagarden.net/wiki/Character_encoding_(Generation_II)) to generate the trainer name you'd like to send to Gameboy A. Order does matter, as each element in gameboyBToAEncodedTrainerNames corresponds to the Trainer IDs within trainerIDList, in that exact order.  
 - If you don't modify these variable to match the data on your Gameboys and the Pokemon that are being traded, **THIS WILL NOT WORK**.
+- Get rid of all of the mail attached to your pokemon, as this data is exchanged whenever a trade occurs. This program exchanges that data as it without any modification, so it will cause issues if that data gets transferred to the other Gameboy. Make sure you DON'T exchange any mail between the two games.
 
 ## How to Use
 1. Upload pokemon-gsc-trade-translator.ino to the Arduino via the Arduino IDE. During this step, make sure that the Gameboys are not connected to the Arduino.  
